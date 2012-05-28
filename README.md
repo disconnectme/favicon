@@ -55,6 +55,7 @@ Finds a favicon URL.
 #### Parameters
 
 `url` A website’s hostname or absolute URL.
+
 `callback` A continuation, to execute when the method completes.
 
 #### Return value
