@@ -19,33 +19,33 @@
  * for more details.
  * <br />
  * @constructor
- * @param {string} [alternate=""] A default favicon URL, absolute or relative.
+ * @param {string} [alt] A default favicon URL, absolute or relative.
  * @author <a href="https://github.com/byoogle">Brian Kennish</a>
  */
-function Favicon(alternate) {
+function Favicon(alt) {
   /**
    * Fetches the default favicon URL.
    * @return {string} An absolute or relative URL.
    */
-  this.getAlternate = function() { return alternate; };
+  this.getAlt = function() { return alt; };
 
   /**
    * Mungs the default favicon URL.
-   * @param  {string}  alternate An absolute or relative URL.
-   * @return {Favicon}           The favicon object.
+   * @param  {string}  alt An absolute or relative URL.
+   * @return {Favicon}     The favicon object.
    */
-  this.setAlternate = function(newAlternate) {
-    alternate = newAlternate;
+  this.setAlt = function(newAlt) {
+    alt = newAlt;
     return this;
   };
 
   /**
    * Finds a favicon URL.
-   * @param  {string}           url        A website’s hostname or absolute URL.
-   * @param  {function(string)} [callback] A continuation, to execute when the
-   *                                       method completes.
-   * @return {Favicon|string}              The favicon object, if a continuation
-   *                                       is given, or a URL, if not.
+   * @param  {string}           url      A website’s absolute URL or hostname.
+   * @param  {function(string)} callback A continuation, to execute when the
+   *                                     method completes, that takes a favicon
+   *                                     URL.
+   * @return {Favicon}                   The favicon object.
    */
   this.get = function(url, callback) {
     var that = this;
@@ -60,7 +60,7 @@ function Favicon(alternate) {
         }
 
         var domain = url.split('.', 2)[1];
-        var favicon = that.getAlternate();
+        var favicon = that.getAlt();
 
         tests:
         for (var i = 0; i < protocolCount; i++) {
@@ -83,14 +83,14 @@ function Favicon(alternate) {
           }
         }
 
-        favicon && callback(favicon);
+        typeof favicon != undefined && callback(favicon);
       }
     }, 100);
 
     return this;
   };
 
-  var version = '1.0.0';
+  var version = '1.1.0';
   var protocols = ['http:', 'https:'];
   var subdomains = ['www'];
   var paths = ['/favicon.ico'];
@@ -99,7 +99,6 @@ function Favicon(alternate) {
   var pathCount = paths.length;
   var anchor = document.createElement('a');
   var undeclared = 'undefined';
-  if (typeof alternate == undeclared) alternate = '';
 
   if (typeof jQuery == undeclared) {
     var script = document.createElement('script');

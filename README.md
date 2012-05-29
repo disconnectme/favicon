@@ -1,6 +1,7 @@
-# favicon.js `1.0.0`
+# favicon.js `1.1.0`
 
-Finds a website’s favicon URL, if any. Requires a context, like a browser extension, that allows cross-origin requests.
+Finds a website’s favicon URL, if any. Requires a context, like a browser
+extension, that allows cross-origin requests.
 
 ## Example
 
@@ -10,25 +11,26 @@ Finds a website’s favicon URL, if any. Requires a context, like a browser exte
   var favicon = new Favicon();
 
   favicon.get('https://disconnect.me/', function(url) {
-    jQuery('img').attr('src', url); // favicon.js automagically loads jQuery.
+    jQuery('#favicon').attr('src', url);
+        // favicon.js automagically loads jQuery.
   });
 </script>
-<img width="16" height="16" src="default.png" alt="A favicon.">
+<img id="favicon" width="16" height="16" src="default.png" alt="A favicon.">
 ```
 
 ## Constructor
 
-### Favicon([{string} alternate=""])
+### Favicon([{string} alt])
 
 A class for finding a website’s favicon URL, if any.
 
 #### Parameter
 
-`alternate` A default favicon URL, absolute or relative.
+`alt` A default favicon URL, absolute or relative.
 
 ## Methods
 
-### {string} getAlternate()
+### {string} getAlt()
 
 Fetches the default favicon URL.
 
@@ -36,30 +38,32 @@ Fetches the default favicon URL.
 
 An absolute or relative URL.
 
-### {Favicon} setAlternate({string} alternate)
+### {Favicon} setAlt({string} alt)
 
 Mungs the default favicon URL.
 
 #### Parameter
 
-`alternate` An absolute or relative URL.
+`alt` An absolute or relative URL.
 
 #### Return value
 
 The favicon object.
 
-### {Favicon|string} get({string} url[, {function(string)} callback])
+### {Favicon} get({string} url, {function(string)} callback)
 
 Finds a favicon URL.
 
 #### Parameters
 
-`url` A website’s hostname or absolute URL.
-`callback` A continuation, to execute when the method completes.
+`url`      A website’s absolute URL or hostname.
+
+`callback` A continuation, to execute when the method completes, that takes a
+           favicon URL.
 
 #### Return value
 
-The favicon object, if a continuation is given, or a URL, if not.
+The favicon object.
 
 ## Author
 
@@ -69,9 +73,16 @@ The favicon object, if a continuation is given, or a URL, if not.
 
 Copyright 2012 Disconnect, Inc.
 
-This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later
+version.
 
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the [GNU General Public License](https://www.gnu.org/licenses/gpl.html) for more details.
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the
+[GNU General Public License](https://www.gnu.org/licenses/gpl.html) for more
+details.
 
 ## See also
 
