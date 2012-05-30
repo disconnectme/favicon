@@ -48,7 +48,8 @@ function Favicon(alt) {
    * @return {Favicon}                   The favicon object.
    */
   this.get = function(url, callback) {
-    var that = this;
+    var favicon = this.getAlt();
+    if (typeof favicon != undeclared) callback(favicon);
 
     var id = setInterval(function() {
       if (typeof jQuery != undeclared) {
@@ -59,40 +60,36 @@ function Favicon(alt) {
           url = anchor.hostname;
         }
 
-        var domain = url.split('.', 2)[1];
-        var favicon = that.getAlt();
+        var domain = url.slice(url.indexOf('.') + 1);
+        var successful;
 
-        tests:
         for (var i = 0; i < protocolCount; i++) {
           for (var j = -1; j < subdomainCount; j++) {
             for (var k = 0; k < pathCount; k++) {
-              var test =
-                  protocols[i] + '//' +
-                      (j + 1 ? subdomains[j] + '.' + domain : url) + paths[k];
-              xhr = jQuery.ajax(test, {async: false});
-              var type = xhr.getResponseHeader('Content-Type');
+              favicon =
+                  protocols[i] + (j + 1 ? subdomains[j] + domain : url) +
+                      paths[k];
 
-              if (
-                xhr.status == 200 && type && type.indexOf('image/') + 1 &&
-                    xhr.responseText
-              ) {
-                favicon = test;
-                break tests;
-              }
+              jQuery.get(favicon, function(data, status, xhr) {
+                var type = xhr.getResponseHeader('Content-Type');
+
+                if (!successful && type && type.indexOf('image/') + 1 && data) {
+                  successful = true;
+                  callback(favicon);
+                }
+              }).bind(favicon);
             }
           }
         }
-
-        typeof favicon != undefined && callback(favicon);
       }
     }, 100);
 
     return this;
   };
 
-  var version = '1.1.0';
-  var protocols = ['http:', 'https:'];
-  var subdomains = ['www'];
+  var version = '1.1.1';
+  var protocols = ['http://'];
+  var subdomains = ['', 'www.'];
   var paths = ['/favicon.ico'];
   var protocolCount = protocols.length;
   var subdomainCount = subdomains.length;
