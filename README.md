@@ -8,7 +8,7 @@ extension, that allows cross-origin requests.
 ```html
 <script type="text/javascript" src="favicon.js"></script>
 <script type="text/javascript">
-  var favicon = new Favicon();
+  var favicon = new Favicon;
 
   favicon.get('https://disconnect.me/', function(url) {
     jQuery('#favicon').attr('src', url);
