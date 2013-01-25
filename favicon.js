@@ -3,7 +3,7 @@
  * a browser extension, that allows cross-origin requests.
  * <br />
  * <br />
- * Copyright 2012 Disconnect, Inc.
+ * Copyright 2012, 2013 Disconnect, Inc.
  * <br />
  * <br />
  * This Source Code Form is subject to the terms of the Mozilla Public License,
@@ -80,7 +80,7 @@ function Favicon(alt) {
     return this;
   };
 
-  var version = '1.2.0';
+  var version = '1.3.0';
   var protocols = ['http://'];
   var subdomains = ['', 'www.'];
   var paths = ['/favicon.ico'];
@@ -93,7 +93,7 @@ function Favicon(alt) {
   if (typeof jQuery == undeclared) {
     var script = document.createElement('script');
     script.setAttribute('type', 'text/javascript');
-    script.setAttribute('src', 'vendor/jquery-1.7.2.min.js');
+    script.setAttribute('src', 'vendor/jquery.js');
     script.onload = function() { jQuery.noConflict(); };
     document.head.appendChild(script);
   }

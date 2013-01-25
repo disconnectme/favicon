@@ -1,4 +1,4 @@
-# favicon.js `1.2.0`
+# favicon.js `1.3.0`
 
 Finds a website’s favicon URL, if any. Requires a context, like a browser
 extension, that allows cross-origin requests.
